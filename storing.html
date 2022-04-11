@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<!-- Basic Page Info -->
+	<meta charset="utf-8">
+	<title>Storing</title>
+	
+	<!-- Google Font -->
+	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+	<!-- CSS -->
+	<link rel="stylesheet" type="text/css" href="vendors/styles/core.css">
+	<link rel="stylesheet" type="text/css" href="vendors/styles/icon-font.min.css">
+	<link rel="stylesheet" type="text/css" href="src/plugins/datatables/css/dataTables.bootstrap4.min.css">
+	<link rel="stylesheet" type="text/css" href="src/plugins/datatables/css/responsive.bootstrap4.min.css">
+	<link rel="stylesheet" type="text/css" href="vendors/styles/style.css">
+	<link rel="stylesheet" type="text/css" href="./css/storing.css">
+</head>
+<body>
+	<div class="header">
+		<div class="header-left">
+			<div class="menu-icon dw dw-menu"></div>
+			<div class="search-toggle-icon dw dw-search2" data-toggle="header_search"></div>
+		</div>
+		<div class="header-right">
+			<div class="user-info-dropdown">
+				<div class="dropdown">
+					<a class="dropdown-toggle" href="#" role="button" data-toggle="dropdown">
+						<span class="user-icon">
+							<img src="vendors/images/img_avatar.png" alt="">
+						</span>
+						<span id="user" class="user-name">Hi </span>
+					</a>
+					<div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
+						<a class="dropdown-item" href="index.html"><i class="dw dw-logout"></i> Log Out</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	<div class="left-side-bar">
+		<div class="brand-logo">
+			<a href="index.php">Autostore</a>
+			<div class="close-sidebar" data-toggle="left-sidebar-close">
+				<i class="ion-close-round"></i>
+			</div>
+		</div>
+		<div class="menu-block customscroll">
+			<div class="sidebar-menu">
+				<ul id="accordion-menu">
+					<li class="dropdown">
+						<a href="grid.html" class="dropdown-toggle no-arrow">
+							<span class="micon dw dw-settings2"></span><span class="mtext">Grid Setting</span>
+						</a>
+					</li>
+					<li class="dropdown">
+						<a href="javascript:;" class="dropdown-toggle">
+							<span class="micon dw dw-list3"></span><span class="mtext">Action</span>
+						</a>
+						<ul class="submenu">
+							<li><a href="picking.html">Picking</a></li>
+							<li><a href="storing.html">Storing</a></li>
+						</ul>
+					</li>
+					<li class="dropdown">
+						<a href="path.html" class="dropdown-toggle no-arrow">
+							<span class="micon dw dw-apartment"></span><span class="mtext">Path Stimulation</span>
+						</a>
+					</li>
+					<li class="dropdown">
+						<a href="javascript:;" class="dropdown-toggle">
+							<span class="micon dw dw-storage"></span><span class="mtext">Storage</span>
+						</a>
+						<ul class="submenu">
+							<li><a href="stock_info.html">Stock Information</a></li>
+							<li><a href="grid_storage.html">Grid Storage</a></li>
+						</ul>
+					</li>
+					<li class="dropdown">
+						<a href="analysis.html" class="dropdown-toggle no-arrow">
+							<span class="micon dw dw-analytics-21"></span><span class="mtext">Analysis</span>
+						</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+
+	<div class="main-container">
+		<div class="pd-ltr-20">
+			<div class="card-box mb-30">
+				<div class="pd-20">
+					<h3 class="text-blue h4">Storing System</h3>
+				</div>
+				<div class="card-box mb-30">
+					<div class="pd-20">
+						<h4 class="text-black h4">New Stock Information</h4>
+					</div>
+					<form class="modal-content animate" onsubmit="add_stock(event)">
+					    <div class="container-container">
+					    	<label for="stock_name"><b>Stock Name :</b></label>
+					    	<input id="stock_name_input" type="text" placeholder="ex :Nike Dunk Low SE" name="stock_name_input" required>
+					     	<label for="stock_code"><b>Stock Code :</b></label>
+					     	<input id="stock_code_input" type="text" placeholder="ex : A0342" name="stock_code_input" required>
+					     	<label for="stock_type"><b>Stock Type :</b></label>
+					     	<input id="stock_type_input" type="text" placeholder="ex : Shoe" name="stock_type_input" required>
+					     	<label for="stock_amount"><b>Stock Amount :</b></label>
+					     	<input id="stock_amount_input" type="number" placeholder="ex : 2" name="stock_amount_input" required>
+					     	<label for="stock_description"><b>Stock Description :</b></label>
+					     	<input id="stock_description_input" type="text" placeholder="ex : Created for the hardwood but taken to the streets. Low-cut collar. Origin : Indonesia." name="stock_description_input" required>
+					     	<label for="stock_weight"><b>Stock Weight :</b></label>
+					     	<input id="stock_weight_input" type="number" placeholder="ex(in gram) : 1000" name="stock_weight_input" required>					     						     
+					     	<label for="arrival_time"><b>Arrival Time :</b></label>
+					     	<input id="arrival_time_input" type="date" name="arrival_time_input" required><br>
+					     	<label for="export_time"><b>Export Time :</b></label>
+					     	<input id="export_time_input" type="date" name="export_time_input" required>			     	
+					     	<input class="button add_stock" type="submit" value="Store">
+					    </div>
+					</form>
+				</div>
+				<!-- write here -->
+			</div>
+		</div>
+	</div>
+	<!-- js -->
+	<script src="https://momentjs.com/downloads/moment.min.js"></script>
+	<script src="vendors/scripts/core.js"></script>
+	<script src="vendors/scripts/script.min.js"></script>
+	<script src="vendors/scripts/process.js"></script>
+	<script src="vendors/scripts/layout-settings.js"></script>
+	<script src="src/plugins/apexcharts/apexcharts.min.js"></script>
+	<script src="src/plugins/datatables/js/jquery.dataTables.min.js"></script>
+	<script src="src/plugins/datatables/js/dataTables.bootstrap4.min.js"></script>
+	<script src="src/plugins/datatables/js/dataTables.responsive.min.js"></script>
+	<script src="src/plugins/datatables/js/responsive.bootstrap4.min.js"></script>
+	<script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.11.4/datatables.min.js"></script>
+	<script src="./js/get_username.js"></script>
+	<script src="./js/storing.js"></script>
+</body>
+</html>

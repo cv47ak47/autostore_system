@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<!-- Basic Page Info -->
+	<meta charset="utf-8">
+	<title>Storing</title>
+	
+	<!-- Google Font -->
+	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+	<!-- CSS -->
+	<link rel="stylesheet" type="text/css" href="vendors/styles/core.css">
+	<link rel="stylesheet" type="text/css" href="vendors/styles/icon-font.min.css">
+	<link rel="stylesheet" type="text/css" href="src/plugins/datatables/css/dataTables.bootstrap4.min.css">
+	<link rel="stylesheet" type="text/css" href="src/plugins/datatables/css/responsive.bootstrap4.min.css">
+	<link rel="stylesheet" type="text/css" href="vendors/styles/style.css">
+	<link rel="stylesheet" type="text/css" href="./css/storing.css">
+</head>
+<body>
+	<div class="header">
+		<div class="header-left">
+			<div class="menu-icon dw dw-menu"></div>
+			<div class="search-toggle-icon dw dw-search2" data-toggle="header_search"></div>
+		</div>
+		<div class="header-right">
+			<div class="user-info-dropdown">
+				<div class="dropdown">
+					<a class="dropdown-toggle" href="#" role="button" data-toggle="dropdown">
+						<span class="user-icon">
+							<img src="vendors/images/img_avatar.png" alt="">
+						</span>
+						<span id="user" class="user-name">Hi </span>
+					</a>
+					<div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
+						<a class="dropdown-item" href="index.html"><i class="dw dw-logout"></i> Log Out</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	<div class="left-side-bar">
+		<div class="brand-logo">
+			<a href="index.php">Autostore</a>
+			<div class="close-sidebar" data-toggle="left-sidebar-close">
+				<i class="ion-close-round"></i>
+			</div>
+		</div>
+		<div class="menu-block customscroll">
+			<div class="sidebar-menu">
+				<ul id="accordion-menu">
+					<li class="dropdown">
+						<a href="grid.html" class="dropdown-toggle no-arrow">
+							<span class="micon dw dw-settings2"></span><span class="mtext">Grid Setting</span>
+						</a>
+					</li>
+					<li class="dropdown">
+						<a href="javascript:;" class="dropdown-toggle">
+							<span class="micon dw dw-list3"></span><span class="mtext">Action</span>
+						</a>
+						<ul class="submenu">
+							<li><a href="picking.html">Picking</a></li>
+							<li><a href="storing.html">Storing</a></li>
+						</ul>
+					</li>
+					<li class="dropdown">
+						<a href="path.html" class="dropdown-toggle no-arrow">
+							<span class="micon dw dw-apartment"></span><span class="mtext">Path Stimulation</span>
+						</a>
+					</li>
+					<li class="dropdown">
+						<a href="javascript:;" class="dropdown-toggle">
+							<span class="micon dw dw-storage"></span><span class="mtext">Storage</span>
+						</a>
+						<ul class="submenu">
+							<li><a href="stock_info.html">Stock Information</a></li>
+							<li><a href="grid_storage.html">Grid Storage</a></li>
+						</ul>
+					</li>
+					<li class="dropdown">
+						<a href="analysis.html" class="dropdown-toggle no-arrow">
+							<span class="micon dw dw-analytics-21"></span><span class="mtext">Analysis</span>
+						</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+
+	<div class="main-container">
+		<div class="pd-ltr-20">
+			<div class="card-box mb-30">
+				<div class="pd-20">
+					<h3 class="text-blue h4">Analysis</h3>
+				</div>
+				<div class="card-box mb-30">
+					<div class="pd-20">
+						<h4 class="text-black h4">Analysis Result</h4>
+					</div>
+					<div class="current-setting">
+						<table id="statistic_table" style="align:center; "></table>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- js -->
+	<script src="vendors/scripts/core.js"></script>
+	<script src="vendors/scripts/script.min.js"></script>
+	<script src="vendors/scripts/process.js"></script>
+	<script src="vendors/scripts/layout-settings.js"></script>
+	<script src="src/plugins/apexcharts/apexcharts.min.js"></script>
+	<script src="src/plugins/datatables/js/jquery.dataTables.min.js"></script>
+	<script src="src/plugins/datatables/js/dataTables.bootstrap4.min.js"></script>
+	<script src="src/plugins/datatables/js/dataTables.responsive.min.js"></script>
+	<script src="src/plugins/datatables/js/responsive.bootstrap4.min.js"></script>
+	<script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.11.4/datatables.min.js"></script>
+
+	<!--Required echart-->
+       	<script src="https://cdn.bootcss.com/html2canvas/0.5.0-beta4/html2canvas.js"></script>
+        <script src="https://cdn.bootcss.com/jspdf/1.3.4/jspdf.debug.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/echarts/4.6.0/echarts-en.min.js" ></script>
+    <!-- Echarts Library -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/echarts/4.6.0/echarts-en.min.js" ></script>
+	<script src="./js/get_username.js"></script>
+	<script src="./js/analysis.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<!-- Basic Page Info -->
+	<meta charset="utf-8">
+	<title>Grid Setting</title>
+
+	<!-- CSS -->
+	<link rel="stylesheet" type="text/css" href="vendors/styles/core.css">
+	<link rel="stylesheet" type="text/css" href="vendors/styles/icon-font.min.css">
+	<link rel="stylesheet" type="text/css" href="src/plugins/datatables/css/dataTables.bootstrap4.min.css">
+	<link rel="stylesheet" type="text/css" href="src/plugins/datatables/css/responsive.bootstrap4.min.css">
+	<link rel="stylesheet" type="text/css" href="vendors/styles/style.css">
+	<link rel="stylesheet" type="text/css" href="./css/grid_setting.css">
+
+</head>
+<body>
+	<div class="header">
+		<div class="header-left">
+			<div class="menu-icon dw dw-menu"></div>
+			<div class="search-toggle-icon dw dw-search2" data-toggle="header_search"></div>
+		</div>
+		<div class="header-right">
+			<div class="user-info-dropdown">
+				<div class="dropdown">
+					<a class="dropdown-toggle" href="#" role="button" data-toggle="dropdown">
+						<span class="user-icon">
+							<img src="vendors/images/img_avatar.png" alt="">
+						</span>
+						<span id="user" class="user-name">Hi </span>
+					</a>
+					<div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
+						<a class="dropdown-item" href="index.html"><i class="dw dw-logout"></i> Log Out</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	<div class="left-side-bar">
+		<div class="brand-logo">
+			<a href="grid.html">Autostore</a>
+			<div class="close-sidebar" data-toggle="left-sidebar-close">
+				<i class="ion-close-round"></i>
+			</div>
+		</div>
+		<div class="menu-block customscroll">
+			<div class="sidebar-menu">
+				<ul id="accordion-menu">
+					<li class="dropdown">
+						<a href="grid.html" class="dropdown-toggle no-arrow">
+							<span class="micon dw dw-settings2"></span><span class="mtext">Grid Setting</span>
+						</a>
+					</li>
+					<li class="dropdown">
+						<a href="javascript:;" class="dropdown-toggle">
+							<span class="micon dw dw-list3"></span><span class="mtext">Action</span>
+						</a>
+						<ul class="submenu">
+							<li><a href="picking.html">Picking</a></li>
+							<li><a href="storing.html">Storing</a></li>
+						</ul>
+					</li>
+					<li class="dropdown">
+						<a href="path.html" class="dropdown-toggle no-arrow">
+							<span class="micon dw dw-apartment"></span><span class="mtext">Path Stimulation</span>
+						</a>
+					</li>
+					<li class="dropdown">
+						<a href="javascript:;" class="dropdown-toggle">
+							<span class="micon dw dw-storage"></span><span class="mtext">Storage</span>
+						</a>
+						<ul class="submenu">
+							<li><a href="stock_info.html">Stock Information</a></li>
+							<li><a href="grid_storage.html">Grid Storage</a></li>
+						</ul>
+					</li>
+					<li class="dropdown">
+						<a href="analysis.html" class="dropdown-toggle no-arrow">
+							<span class="micon dw dw-analytics-21"></span><span class="mtext">Analysis</span>
+						</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+
+	<div class="main-container">
+		<div class="card-box mb-30">
+			<div class="pd-20">
+				<h3 class="text-blue h4">Grid Setting Configuration</h3>
+			</div>
+			<div class="current-setting">
+				<table id="current_grid_setting" style="align:center"></table>
+			</div>
+			<br><br>
+		</div>
+		<div class="card-box mb-30">
+			<div class="pd-20">
+				<h4 class="text-black h4">Grid Size</h4>
+			</div>
+			<form class="modal-content animate" onsubmit="change_grid_size(event)">
+			    <div class="container-container">
+			    	<label for="grid_length"><b>Grid Length:</b></label>
+			    	<input id="grid_length_input" type="number" placeholder="Enter a number(1-10)" name="grid_length_input" required>
+			     	<label for="grid_width"><b>Grid Width :</b></label>
+			     	<input id="grid_width_input" type="number" placeholder="Enter a number(1-10)" name="grid_width_input" required>
+			     	<label for="grid_depth"><b>Grid Depth :</b></label>
+			     	<input id="grid_depth_input" type="number" placeholder="Enter a number(1-5)" name="grid_depth_input" required>
+			     	<input class="button change_grid_size_button" type="submit" value="Change">
+			    </div>
+			</form>
+		</div>
+		<div class="card-box mb-30">
+			<div class="pd-20">
+				<h4 class="text-black h4">Port Location</h4>
+			</div>
+			<form class="modal-content animate" onsubmit="change_port_location(event)">
+			    <div class="container-container">
+			    	<label for="input_port_location"><b>Input Port Location:</b></label>
+			    	<select id="input_port_select"></select><br>
+			     	<!-- <input id="input_port" type="text" placeholder="Enter the ID" name="item-id" required> -->
+			     	<label for="output_port_location"><b>Output Port Location:</b></label>
+			     	<select id="output_port_select"></select>
+			     	<!-- <input id="input_port" type="text" placeholder="Enter the ID" name="item-id" required> -->
+			     	<input class="button change_port_button" type="submit" value="Change">
+			    </div>
+			</form>
+		</div>
+		<div class="card-box mb-30">
+			<div class="pd-20">
+				<h4 class="text-black h4">Path Finding Algorithm</h4>
+			</div>
+			<form class="modal-content animate" onsubmit="change_path_algorithm(event)">
+			    <div class="container-container">
+			    	<input type="radio" id="a_star_opt" name="path_algo" value="A_STAR">
+			    	<label for="a_star_opt"><b>A* Algorithm</b></label><br>
+			    	<input type="radio" id="dijkstra_opt" name="path_algo" value="DIJKSTRA">
+			    	<label for="dijkstra_opt"><b>Dijkstra Algorithm</b></label><br>
+			     	<input class="button change_path_algo" type="submit" value="Change">
+			    </div>
+			</form>
+		</div>
+		<div class="card-box mb-30">
+			<div class="pd-20">
+				<h4 class="text-black h4">Reshuffling Method</h4>
+			</div>
+			<form class="modal-content animate" onsubmit="change_reshuffling_method(event)">
+			    <div class="container-container">
+			    	<input type="radio" id="intermediate_opt" name="reshuffle" value="intermediate">
+			    	<label for="intermediate_opt"><b>Intermediate Reshuffling</b></label><br>
+			    	<input type="radio" id="delaying_opt" name="reshuffle" value="delaying">
+			    	<label for="delaying_opt"><b>Delaying Reshuffling</b></label><br>
+			     	<input class="button change_reshuffle" type="submit" value="Change">
+			    </div>
+			</form>
+		</div>
+	</div>
+	<!-- js -->
+	<script src="vendors/scripts/core.js"></script>
+	<script src="vendors/scripts/script.min.js"></script>
+	<script src="vendors/scripts/process.js"></script>
+	<script src="vendors/scripts/layout-settings.js"></script>
+	<script src="src/plugins/apexcharts/apexcharts.min.js"></script>
+	<script src="src/plugins/datatables/js/jquery.dataTables.min.js"></script>
+	<script src="src/plugins/datatables/js/dataTables.bootstrap4.min.js"></script>
+	<script src="src/plugins/datatables/js/dataTables.responsive.min.js"></script>
+	<script src="src/plugins/datatables/js/responsive.bootstrap4.min.js"></script>
+
+	<script src="./js/create_grid.js"></script>	
+	<script src="./js/get_username.js"></script>
+	<script src="./js/grid_setting.js"></script>
+
+
+	<!-- Datatable Setting js -->
+	<script src="vendors/scripts/datatable-setting.js"></script></body>
+</body>
+</html>
