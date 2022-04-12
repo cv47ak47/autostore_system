@@ -7,7 +7,7 @@ function submitLoginForm(event){
 	var found = false;
 
 	$.ajax({
-	    url:'http://localhost:3031/test/getallsupervisordata',
+	    url:'https://autostore-heroku.herokuapp.com/test/getallsupervisordata',
 	    type:'get',
 	    async :  false,
 	    

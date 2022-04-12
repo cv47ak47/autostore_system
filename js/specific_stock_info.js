@@ -41,7 +41,7 @@ function get_grid_data() {
 
 	$.ajax({
     type: 'GET',
-    url: "http://localhost:3031/test/getgriddata/" +supervisor_id ,
+    url: "https://autostore-heroku.herokuapp.com/test/getgriddata/" +supervisor_id ,
     async :  false,
     success: function(data){
 			grid_data = data;
@@ -55,7 +55,7 @@ function get_grid_data() {
 
 function get_dataset() {        
 	$.ajax({
-    url:'http://localhost:3031/test/getallstockdata',
+    url:'https://autostore-heroku.herokuapp.com/test/getallstockdata',
     type:'get',
     async :  false,
     
@@ -71,7 +71,7 @@ function get_dataset() {
 
 function get_stock_bin_data() {        
 	$.ajax({
-    url:'http://localhost:3031/test/getallstockbindata',
+    url:'https://autostore-heroku.herokuapp.com/test/getallstockbindata',
     type:'get',
     async :  false,
     
@@ -88,7 +88,7 @@ function get_stock_bin_data() {
 
 function get_storage_data() {
 	$.ajax({
-    url:'https://8a0f-2001-d08-1a02-fb5a-7999-5565-3937-c79c.ngrok.io/test/getallstoragedata',
+    url:'https://autostore-heroku.herokuapp.com/test/getallstoragedata',
     type:'get',
     async :  false,
     

@@ -59,7 +59,7 @@ function get_initial_data() {
 	// get grid data
 	$.ajax({
     type: 'GET',
-    url: "http://localhost:3031/test/getgriddata/" +supervisor_id ,
+    url: "https://autostore-heroku.herokuapp.com/test/getgriddata/" +supervisor_id ,
     async :  false,
     success: function(data){
 			console.log(data)
@@ -582,7 +582,7 @@ function all_storage() {
 ////////////////////////////////
 function get_dataset() {        
 	$.ajax({
-    url:'http://localhost:3031/test/getallstockdata',
+    url:'https://autostore-heroku.herokuapp.com/test/getallstockdata',
     type:'get',
     async :  false,
     

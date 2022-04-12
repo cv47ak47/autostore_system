@@ -7,7 +7,7 @@ function get_username() {
 	// get grid data
 	$.ajax({
     type: 'GET',
-    url: "http://localhost:3031/test/getallsupervisordata",
+    url: "https://autostore-heroku.herokuapp.com/test/getallsupervisordata",
     async :  false,
     success: function(data){
       for(var i=0; i<data.length; i++) {

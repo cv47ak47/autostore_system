@@ -21,7 +21,7 @@ var stock_data = [];
 
 function get_dataset() {        
 	$.ajax({
-    url:'http://localhost:3031/test/getallstockdata',
+    url:'https://autostore-heroku.herokuapp.com/test/getallstockdata',
     type:'get',
     async :  false,
     

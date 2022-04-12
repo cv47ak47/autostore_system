@@ -20,9 +20,14 @@ function Createtable(data,location) {
 	console.log(col)
 	new_col.push("No","Path","Path Length","Computational Time(ms)","Path algorithm","AGV");
 
-	var table = document.createElement("table");	//dynamic table
+	var thead = document.createElement("thead");
+  var tbody = document.createElement("tbody");  
+  
+  var tr = thead.insertRow(-1);                   // TABLE ROW.
 
-	var tr = table.insertRow(-1);		//insert new row
+	//var table = document.createElement("table");	//dynamic table
+
+	//var tr = table.insertRow(-1);		//insert new row
 
 	for(var i=0 ; i < new_col.length; i++) {
 		var th = document.createElement("th");
@@ -31,17 +36,18 @@ function Createtable(data,location) {
 	}
 
 	for(var i=0 ; i < data.length; i++) {
-		tr = table.insertRow(-1);
+		tr = tbody.insertRow(-1);
 		for(var j = 0 ; j < new_col.length; j++) {
 			var cell = tr.insertCell(-1);
 			cell.innerHTML = data[i][col[j]];				
 		}		
 	}
-	console.log(table)
 
 	var container = document.getElementById(location);
-		console.log(container)
-	container.appendChild(table);
+	  container.appendChild(thead);
+	  container.appendChild(tbody);
+	//container.appendChild(table);
+
 }
 
 function get_initial_data() {
@@ -50,7 +56,7 @@ function get_initial_data() {
 	// get grid data
 	$.ajax({
 	    type: 'GET',
-	    url: "http://localhost:3031/test/getallgriddata/" ,
+	    url: "https://autostore-heroku.herokuapp.com/test/getallgriddata/" ,
 	    async :  false,
 
 	    success: function(data){
@@ -65,7 +71,7 @@ function get_initial_data() {
 
  	$.ajax({
 	    type: 'GET',
-	    url: "http://localhost:3031/test/getallalgodata",
+	    url: "https://autostore-heroku.herokuapp.com/test/getallalgodata",
 	    async :  false,
 
 	    success: function(data){
@@ -81,7 +87,7 @@ function get_initial_data() {
 
  	$.ajax({
 	    type: 'GET',
-	    url: "http://localhost:3031/test/getallstatisticdata/",
+	    url: "https://autostore-heroku.herokuapp.com/test/getallstatisticdata/",
 	    async :  false,
 
 	    success: function(data){
@@ -109,7 +115,7 @@ function get_initial_data() {
 				modified_statistic_data[i].path = JSON.parse(modified_statistic_data[i].path);
 			}			
 
-			Createtable(modified_statistic_data,"statistic_table")
+			Createtable(modified_statistic_data,"statistic_table","")
 	    },
 	    error: function(jqXHR, textStatus, errorThrown) {
 	      console.log(textStatus, errorThrown);
@@ -121,7 +127,7 @@ function delete_data() {
 	id =34;
  	$.ajax({
     type: 'POST',
-    url: "http://localhost:3031/test/deletestockdata/",
+    url: "https://autostore-heroku.herokuapp.com/test/deletestockdata/",
     async :  false,
     data : {
     	stock_id : 31, 

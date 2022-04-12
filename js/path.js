@@ -68,7 +68,7 @@ var current_reshuffle_algo;
 function get_second_time() {
 		// get stock bin data
  	$.ajax({
-    url:'http://localhost:3031/test/getallstockbindata',
+    url:'https://autostore-heroku.herokuapp.com/test/getallstockbindata',
     type:'get',
     async :  false,
     
@@ -88,7 +88,7 @@ function get_initial_data() {
 	// get grid data
 	$.ajax({
     type: 'GET',
-    url: "http://localhost:3031/test/getgriddata/" +supervisor_id ,
+    url: "https://autostore-heroku.herokuapp.com/test/getgriddata/" +supervisor_id ,
     async :  false,
     success: function(data){
 			grid_data = data;
@@ -102,7 +102,7 @@ function get_initial_data() {
   // get agv data
 	$.ajax({
     type: 'GET',
-    url: "http://localhost:3031/test/getallagvdata" ,
+    url: "https://autostore-heroku.herokuapp.com/test/getallagvdata" ,
     async :  false,
     success: function(data){
 			agv_data = data;
@@ -116,7 +116,7 @@ function get_initial_data() {
   // get algo data
 	$.ajax({
     type: 'GET',
-    url: "http://localhost:3031/test/getallalgodata",
+    url: "https://autostore-heroku.herokuapp.com/test/getallalgodata",
     async :  false,
     success: function(data){
 			algo_data = data;
@@ -146,7 +146,7 @@ function get_initial_data() {
 
 	// get stock bin data
  	$.ajax({
-    url:'http://localhost:3031/test/getallstockbindata',
+    url:'https://autostore-heroku.herokuapp.com/test/getallstockbindata',
     type:'get',
     async :  false,
     
@@ -160,7 +160,7 @@ function get_initial_data() {
 	});
 
 	$.ajax({
-    url:'http://localhost:3031/test/getallstoragedata',
+    url:'https://autostore-heroku.herokuapp.com/test/getallstoragedata',
     type:'get',
     async :  false,
     
@@ -190,7 +190,7 @@ function get_initial_data() {
 
  	$.ajax({
 	    type: 'GET',
-	    url: "http://localhost:3031/test/getallstatisticdata/",
+	    url: "https://autostore-heroku.herokuapp.com/test/getallstatisticdata/",
 	    async :  false,
 
 	    success: function(data){
@@ -807,7 +807,7 @@ function build_pallets() {
 				grid.innerHTML = '<font size="5">PO</font>' +'<div><span class="no-robot"></span></div>'; //放101,201这样
 			}
 			else {
-				grid.setAttribute("id", id)
+				grid.setAttribute("id", id);
 				grid.setAttribute("class","grid-item");
 				grid.setAttribute("value", i.toString() + rowcolsum_with_zero);
 				grid.setAttribute("x", (j-1).toString());
@@ -877,7 +877,7 @@ function run_in_grid(all_all_path) {
 					console.log(all_all_path[i].y)
 					$.ajax({
 				    type: 'POST',
-				    url: "http://localhost:3031/test/updateagvdata" ,   
+				    url: "https://autostore-heroku.herokuapp.com/test/updateagvdata" ,   
 				    data: {
 							agv_id : j,
 							current_pos : xy_to_position(all_all_path[i].x , all_all_path[i].y),
@@ -896,7 +896,7 @@ function run_in_grid(all_all_path) {
 				if(i==all_all_path.length-2 &&  all_all_path[i].robot == j) {
 					$.ajax({
 				    type: 'POST',
-				    url: "http://localhost:3031/test/updateagvdata" ,   
+				    url: "https://autostore-heroku.herokuapp.com/test/updateagvdata" ,   
 				    data: {
 							agv_id : j,
 							current_pos : xy_to_position(all_all_path[i+1].x , all_all_path[i+1].y),
@@ -2131,6 +2131,19 @@ function set_point_for_pick(task,selected_item_id,special) {
 			
 			interval = setInterval(function() {run_in_grid(path)}, 500);			
 	}
+	var test_metrics = sort_metrics(metrics)
+	//sort_metrics(metrics)
+
+	//var test_metrics = metrics;
+
+			// for(var i=0; i<test_metrics.length; i++) {
+			// 	delete test_metrics[i]['path'];
+			// 	delete test_metrics[i]['search_time'];
+			// }
+			console.log(test_metrics)
+
+//	console.log(metrics[0].search_time+metrics[1].search_time)
+	Createtable(test_metrics,"showData",null,"table",null)
 }
 function set_point() {
 	console.log("hi")
@@ -2285,9 +2298,8 @@ function set_point() {
 	//run_in_grid()
 	console.log(metrics)
 
-	sort_metrics(metrics)
-
-	var test_metrics = metrics;
+	var test_metrics = sort_metrics(metrics)
+	alert(test_metrics)
 
 			for(var i=0; i<test_metrics.length; i++) {
 				delete test_metrics[i]['path'];
@@ -2296,6 +2308,7 @@ function set_point() {
 
 //	console.log(metrics[0].search_time+metrics[1].search_time)
 	Createtable(test_metrics,"showData",null,"table",null)
+
 }
 
 ////////////////////////////////
@@ -2303,9 +2316,12 @@ function set_point() {
 ////////////////////////////////
 
 function sort_metrics(metric) {
+	var agv_with_path = [];
+	var new_metric = [];
 	var metric_path = [];
 	var metric_computational_time = 0;
 	var metric_path_length = 0;
+	var metric_path_time = metric[metric.length-1].time;
 	var agv_id;
 	var current_path_algo_id;
 
@@ -2318,16 +2334,19 @@ function sort_metrics(metric) {
 		}
 	}
 
-
-	console.log(metric_path)
-	console.log(metric_computational_time)
-	console.log(metric_path_length)
-
 	if(metric[0].AGV == 'AGV 1') {
 		agv_id = 1;
+		agv_with_path.push({
+			AGV : agv_id,
+			Path : metric_path
+		})
 	}
 	else if(metric[0].AGV == 'AGV 2') {
 		agv_id = 2;
+		agv_with_path.push({
+			AGV : agv_id,
+			Path : metric_path
+		})
 	}
 	console.log(current_path_algo)
 	if(current_path_algo == "astar") {
@@ -2336,11 +2355,18 @@ function sort_metrics(metric) {
 	else if(current_path_algo == "dijkstra") {
 			current_path_algo_id = 1;	
 	}
-console.log(agv_id)
-console.log(current_path_algo_id)
+
+	new_metric.push({
+		AGV : agv_id,
+		path_length : metric_path_length,
+		time : metric_path_time,
+	})
+
+	Createtable(agv_with_path,"showpath",null,"table",null)
+
 	$.ajax({
 	    type: 'POST',
-	    url: 'http://localhost:3031/test/addstatisticdata',
+	    url: 'https://autostore-heroku.herokuapp.com/test/addstatisticdata',
 
 	    data: {
 				statistic_id : statistic_data[statistic_data.length-1].statistic_id+1,
@@ -2359,6 +2385,8 @@ console.log(current_path_algo_id)
 	      console.log(textStatus, errorThrown);
 	    } 
  	});
+
+ 	return new_metric;
 }
 
 function calculate_path_length() {
@@ -2375,7 +2403,7 @@ function calculate_path_length() {
 ////////////////////////////////
 function get_dataset() {        
 	$.ajax({
-    url:'http://localhost:3031/test/getallstockdata',
+    url:'https://autostore-heroku.herokuapp.com/test/getallstockdata',
     type:'get',
     async :  false,
     
@@ -2697,7 +2725,7 @@ function assigning_stock(storing_stock_id) {
 
 		$.ajax({
     type: 'POST',
-    url: 'http://localhost:3031/test/addstockbindata',
+    url: 'https://autostore-heroku.herokuapp.com/test/addstockbindata',
 
     data: {
   		stock_bin_id : stock_bin_data[stock_bin_data.length-1].stock_bin_id+1,
@@ -2938,13 +2966,6 @@ function pick_item(item_id) {
 	}	
 }
 
-function hi(i,r_i) {
-
-		robot_id=r_i;
-		id=i;
-		document.getElementById((i).toString()).innerHTML ="PO" +'<div><span class="got-robot" style="background-color:'+color[robot_id-1]+';"><div>'+robot_id+'</div></span></div>';
-}
-
 function receive_picking_stock() {
 	const queryString = window.location.search;
 	const urlParams = new URLSearchParams(queryString);
@@ -2970,6 +2991,9 @@ function add_current_location_robot() {
 		var point = position_to_xy(agv_data[i].current_pos)
 		console.log(point)
 		draw_path(point.x,point.y,agv_data[i].agv_id);
+
+		var agvid = (i+1).toString();
+		document.getElementById("pos_agv"+agvid).innerHTML = "AGV" + (i+1) +" default position = " + agv_data[i].current_pos;
 	}
 }
 
@@ -3005,9 +3029,8 @@ function RunAllFunction() {
 	//assign_stock();
 	receive_picking_stock();
 	receive_storing_stock();
-	//position_to_xy(11)
-	//add_current_location_robot();
-	set_point();
+	add_current_location_robot();
+	//set_point();
 
 	//assigning_stock(1)
 }

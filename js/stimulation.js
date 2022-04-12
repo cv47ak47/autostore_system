@@ -60,7 +60,7 @@ function get_initial_data() {
 	// get grid data
 	$.ajax({
     type: 'GET',
-    url: "http://localhost:3031/test/getgriddata/" +supervisor_id ,
+    url: "https://autostore-heroku.herokuapp.com/test/getgriddata/" +supervisor_id ,
     async :  false,
     success: function(data){
 			console.log(data)
@@ -74,7 +74,7 @@ function get_initial_data() {
 
 	$.ajax({
     type: 'GET',
-    url: " http://localhost:3031/test/getallagvdata" ,
+    url: " https://autostore-heroku.herokuapp.com/test/getallagvdata" ,
     async :  false,
     success: function(data){
 			agv_data = data;
@@ -738,7 +738,7 @@ function change_grid_size(event) {
 
 	$.ajax({
 	    type: 'POST',
-	    url: 'http://localhost:3031/test/updategriddata',
+	    url: 'https://autostore-heroku.herokuapp.com/test/updategriddata',
 	    data: {
 	      grid_depth : grid_data.grid_depth, 
 	      grid_length : selected_grid_length,
@@ -827,7 +827,7 @@ function change_port_location(event) {
 	else {
 		$.ajax({
 	    type: 'POST',
-	    url: 'http://localhost:3031/test/updategriddata',
+	    url: 'https://autostore-heroku.herokuapp.com/test/updategriddata',
 	    data: {
 	      grid_depth : grid_data.grid_depth, 
 	      grid_length : grid_data.grid_length,
@@ -857,7 +857,7 @@ function change_algorithm() {
 
 	$.ajax({
     type: 'GET',
-    url: 'http://localhost:3031/test/getalgodata' + supervisor_id,
+    url: 'https://autostore-heroku.herokuapp.com/test/getalgodata' + supervisor_id,
 
     success: function(data){
       algorithm_data = data;
@@ -875,7 +875,7 @@ function change_algorithm() {
 
  	$.ajax({
     type: 'POST',
-    url: 'http://localhost:3031/test/updatealgodata',
+    url: 'https://autostore-heroku.herokuapp.com/test/updatealgodata',
     data: {
       algorithm_name : changed_algo, 
       algorithm_type : algorithm_data.algorithm_type,
@@ -2200,7 +2200,7 @@ function calculate_path_length() {
 ////////////////////////////////
 function get_dataset() {        
 	$.ajax({
-    url:'http://localhost:3031/test/getallstockdata',
+    url:'https://autostore-heroku.herokuapp.com/test/getallstockdata',
     type:'get',
     async :  false,
     

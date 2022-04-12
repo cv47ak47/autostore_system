@@ -64,7 +64,7 @@ function get_initial_data() {
 	// get grid data
 	$.ajax({
     type: 'GET',
-    url: "http://localhost:3031/test/getallgriddata/" ,
+    url: "https://autostore-heroku.herokuapp.com/test/getallgriddata/" ,
     async :  false,
 
     success: function(data){
@@ -92,7 +92,7 @@ function get_initial_data() {
 
  	$.ajax({
     type: 'GET',
-    url: "http://localhost:3031/test/getallalgodata/",
+    url: "https://autostore-heroku.herokuapp.com/test/getallalgodata/",
     async :  false,
 
     success: function(data){
@@ -135,9 +135,9 @@ function change_grid_size(event) {
 	var input = true;
 	var supervisor_id = parseInt(window.localStorage.getItem("supervisor_id"));
 
-	var selected_grid_length = event.target['grid_length_input'].value;
-	var selected_grid_width = event.target['grid_width_input'].value;
-	var selected_grid_depth = event.target['grid_depth_input'].value;
+	var selected_grid_length = parseInt(event.target['grid_length_input'].value);
+	var selected_grid_width = parseInt(event.target['grid_width_input'].value);
+	var selected_grid_depth = parseInt(event.target['grid_depth_input'].value);
 
 	if(selected_grid_length > 10 || selected_grid_length < 1) {
 		alert("the value of grid length must be between 1 to 10");
@@ -166,7 +166,7 @@ function change_grid_size(event) {
 	if(input) {
 		$.ajax({
 	    type: 'POST',
-	    url: 'http://localhost:3031/test/updategriddata',
+	    url: 'https://autostore-heroku.herokuapp.com/test/updategriddata',
 	    data: {
 	      grid_depth : selected_grid_depth, 
 	      grid_length : selected_grid_length,
@@ -197,7 +197,7 @@ function change_grid_size(event) {
 		for(var i=0; i<initial_num_robot; i++) {
 			$.ajax({
 		    type: 'POST',
-		    url: "http://localhost:3031/test/updateagvdata" ,   
+		    url: "https://autostore-heroku.herokuapp.com/test/updateagvdata" ,   
 		    data: {
 					agv_id : i+1,
 					current_pos : agv_pos[i],
@@ -280,7 +280,7 @@ function change_port_location(event) {
 	else {
 		$.ajax({
 	    type: 'POST',
-	    url: 'http://localhost:3031/test/updategriddata',
+	    url: 'https://autostore-heroku.herokuapp.com/test/updategriddata',
 	    data: {
 	      grid_depth : grid_data.grid_depth, 
 	      grid_length : grid_data.grid_length,
@@ -337,7 +337,7 @@ function change_path_algorithm(event) {
 			algo_id = (supervisor_id)*(i+1);
 			$.ajax({
 		    type: 'POST',
-		    url: 'http://localhost:3031/test/updatealgodata/' + algo_id,
+		    url: 'https://autostore-heroku.herokuapp.com/test/updatealgodata/' + algo_id,
 		    data: {
 		      algorithm_name : choose_algo[i].algorithm_name, 
 		      algorithm_type : 'path',
@@ -394,7 +394,7 @@ function change_reshuffling_method(event) {
 
 			$.ajax({
 		    type: 'POST',
-		    url: 'http://localhost:3031/test/updatealgodata/' + algo_id,
+		    url: 'https://autostore-heroku.herokuapp.com/test/updatealgodata/' + algo_id,
 		    data: {
 		      algorithm_name : choose_reshuffle_method[i].algorithm_name, 
 		      algorithm_type : 'reshuffle',
